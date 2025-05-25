@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets\img\icon_web.jpeg" type="image/x-icon">
+    <title>Detalle del Auto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Best<span>car</span></h1>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Modelos</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="detalle-container" style="margin-top:100px;">
+        <a href="index.html" class="btn">← Volver</a>
+        <div id="detalle-producto"></div>
+    </div>
+    <script src="db.js"></script>
+    <script>
+        // Obtener el id de la URL
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+
+        // Buscar el producto
+        const producto = (typeof productos !== "undefined")
+            ? productos.find(p => p.id === id)
+            : null;
+
+        // Mostrar detalles
+        const detalleDiv = document.getElementById('detalle-producto');
+        if (producto) {
+            detalleDiv.innerHTML = `
+                <h1>${producto.nombre}</h1>
+                <img src="${producto.imagen}" alt="${producto.nombre}" style="max-width:400px;">
+                <h2>Precio: $${producto.precio.toLocaleString()}</h2>
+                <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+                <p><strong>Modelo:</strong> ${producto.modelo || '-'}</p>
+                <p><strong>Año:</strong> ${producto.año || '-'}</p>
+                <p><strong>Marca:</strong> ${producto.marca}</p>
+                <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                ${producto.destacado ? '<span class="destacado">Destacado</span>' : ''}
+            `;
+        } else {
+            detalleDiv.innerHTML = '<p>Auto no encontrado.</p>';
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h3>Best car</h3>
+                    <p>Líderes en venta de autos usado con más de 15 años de experiencia en el mercado Panameño.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Modelos</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Financiamiento</a></li>
+                        <li><a href="#">Garantías Extendidas</a></li>
+                        <li><a href="#">Seguros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Suscribete</h3>
+                    <p>Suscríbete para recibir ofertas exclusivas.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Best car | Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
