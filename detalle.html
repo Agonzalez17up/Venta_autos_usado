@@ -17,10 +17,10 @@
             </div>
             <nav class="navbar">
                 <ul class="nav-list">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#productos">Modelos</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#productos">Modelos</a></li>
+                    <li><a href="index.html#testimonios ">Testimonios</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -53,16 +53,29 @@
         const detalleDiv = document.getElementById('detalle-producto');
         if (producto) {
             detalleDiv.innerHTML = `
-                <h1>${producto.nombre}</h1>
-                <img src="${producto.imagen}" alt="${producto.nombre}" style="max-width:400px;">
-                <h2>Precio: $${producto.precio.toLocaleString()}</h2>
-                <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-                <p><strong>Modelo:</strong> ${producto.modelo || '-'}</p>
-                <p><strong>Año:</strong> ${producto.año || '-'}</p>
-                <p><strong>Marca:</strong> ${producto.marca}</p>
-                <p><strong>Categoría:</strong> ${producto.categoria}</p>
-                ${producto.destacado ? '<span class="destacado">Destacado</span>' : ''}
-            `;
+            <div class="detalle-producto-box">
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <div class="detalle-producto-info">
+                    <h1>${producto.nombre} ${producto.año || ''}</h1>
+                    <h2>Precio: $${producto.precio.toLocaleString()}</h2>
+                    <p><strong>Marca:</strong> ${producto.marca}</p>
+                    <p><strong>Modelo:</strong> ${producto.modelo || '-'}</p>
+                    <p><strong>Año:</strong> ${producto.año || '-'}</p>
+                    <p><strong>Transmision:</strong> ${producto.transmision}</p>
+                    <p><strong>Combustible:</strong> ${producto.combustible}</p>                    
+                    <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                    <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+                    ${producto.destacado ? '<span class="destacado">Destacado</span>' : ''}
+                    <div class="botones-extra">
+                        <a href="#" class="btn btn-cotizar">
+                            <i class="fa-solid fa-file-invoice-dollar"></i> Cotizar
+                        <a href="https://wa.me/50712345678" target="_blank" class="btn btn-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> Whatsapp Chat
+                        </a>
+                    </div>                
+                </div>
+            </div>`;
+
         } else {
             detalleDiv.innerHTML = '<p>Auto no encontrado.</p>';
         }

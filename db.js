@@ -1,4 +1,4 @@
-// db.js - Base de datos de productos (autos)
+// db.js - Base de datos de productos (autos) con campos extendidos
 const productos = [
     {
         id: 1,
@@ -10,7 +10,19 @@ const productos = [
         categoria: "eléctrico",
         marca: "Tesla",
         modelo: "Model S",
-        destacado: true
+        año: 2023,
+        destacado: true,
+        carroceria: "Sedán",
+        tipo: "Carro",
+        combustible: "Eléctrico",
+        transmision: "Automática",
+        colorExterior: "Negro",
+        colorInterior: "Negro",
+        interior: "Cuero",
+        puertas: 4,
+        pasajeros: 5,
+        caracteristicas: ["Aire acondicionado", "Pantalla táctil", "Autopilot", "Bluetooth", "Cámara trasera"],
+        ubicacion: "Sucursal Principal"
     },
     {
         id: 2,
@@ -21,9 +33,20 @@ const productos = [
         imagen: "assets/img_car_sales/02_car_seles.PNG",
         categoria: "deportivo",
         marca: "Porsche",
-        modelo: "911", 
+        modelo: "911",
         año: 2022,
-        destacado: true
+        destacado: true,
+        carroceria: "Coupé",
+        tipo: "Carro",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Gris",
+        colorInterior: "Negro",
+        interior: "Cuero",
+        puertas: 2,
+        pasajeros: 4,
+        caracteristicas: ["Aire acondicionado", "Bluetooth", "Sensores de retroceso", "Sistema de sonido premium"],
+        ubicacion: "Sucursal Costa del Este"
     },
     {
         id: 3,
@@ -35,7 +58,19 @@ const productos = [
         categoria: "suv",
         marca: "Audi",
         modelo: "Q5",
-        destacado: false
+        año: 2024,
+        destacado: false,
+        carroceria: "SUV",
+        tipo: "Camioneta",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Blanco",
+        colorInterior: "Gris",
+        interior: "Cuero",
+        puertas: 5,
+        pasajeros: 5,
+        caracteristicas: ["Aire acondicionado", "Cámara trasera", "Bluetooth", "Control de crucero"],
+        ubicacion: "Sucursal Vía Brasil"
     },
     {
         id: 4,
@@ -46,9 +81,20 @@ const productos = [
         imagen: "assets/img_car_sales/04_car_seles.PNG",
         categoria: "sedan",
         marca: "Volkswagen",
-        modelo: "Polo", 
-        año : 2013,  
-        destacado: true
+        modelo: "Polo",
+        año: 2013,
+        destacado: true,
+        carroceria: "Sedán",
+        tipo: "Carro",
+        combustible: "Gasolina",
+        transmision: "Manual",
+        colorExterior: "Azul",
+        colorInterior: "Gris",
+        interior: "Tela",
+        puertas: 4,
+        pasajeros: 5,
+        caracteristicas: ["Aire acondicionado", "Conexión USB", "Radio AM/FM"],
+        ubicacion: "Sucursal Vía España"
     },
     {
         id: 5,
@@ -60,8 +106,19 @@ const productos = [
         categoria: "4x4",
         marca: "Jeep",
         modelo: "Wrangler",
-        año: 2025,  
-        destacado: false
+        año: 2025,
+        destacado: false,
+        carroceria: "SUV",
+        tipo: "Camioneta",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Verde",
+        colorInterior: "Negro",
+        interior: "Tela",
+        puertas: 4,
+        pasajeros: 5,
+        caracteristicas: ["Tracción 4x4", "Pantalla táctil", "Desempeño off-road"],
+        ubicacion: "Sucursal Transístmica"
     },
     {
         id: 6,
@@ -74,21 +131,43 @@ const productos = [
         marca: "Mercedes-Benz",
         modelo: "AMG GTR",
         año: 2018,
-        destacado: true
+        destacado: true,
+        carroceria: "Coupé",
+        tipo: "Carro",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Amarillo",
+        colorInterior: "Negro",
+        interior: "Cuero",
+        puertas: 2,
+        pasajeros: 2,
+        caracteristicas: ["Aire acondicionado", "Sistema de sonido premium", "Botón de arranque"],
+        ubicacion: "Sucursal Costa del Este"
     },
     {
         id: 7,
         placa: 'CJ1234',
         nombre: "BMW M5",
         precio: 140000,
-        descripcion: "sedán deportivo de lujo con motorización híbrida enchufable. Combina un motor V8 biturbo de 4.4 litros con un motor eléctrico.",
+        descripcion: "Sedán deportivo de lujo con motorización híbrida enchufable. Combina un motor V8 biturbo de 4.4 litros con un motor eléctrico.",
         imagen: "assets/img_car_sales/07_car_seles.PNG",
         categoria: "deportivo",
         marca: "BMW",
         modelo: "M5",
         año: 2025,
-        destacado: true
-    },    
+        destacado: true,
+        carroceria: "Sedán",
+        tipo: "Carro",
+        combustible: "Híbrido enchufable",
+        transmision: "Automática",
+        colorExterior: "Negro",
+        colorInterior: "Beige",
+        interior: "Cuero",
+        puertas: 4,
+        pasajeros: 5,
+        caracteristicas: ["Asientos deportivos", "Bluetooth", "Sensores de proximidad", "Control por voz"],
+        ubicacion: "Sucursal Vía Israel"
+    },
     {
         id: 8,
         placa: 'CF1234',
@@ -100,7 +179,18 @@ const productos = [
         marca: "Suzuki Grand",
         modelo: "Vitara",
         año: 2023,
-        destacado: false
+        destacado: false,
+        carroceria: "SUV",
+        tipo: "Camioneta",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Plata",
+        colorInterior: "Gris",
+        interior: "Tela",
+        puertas: 5,
+        pasajeros: 5,
+        caracteristicas: ["Aire acondicionado", "Bluetooth", "Cámara de reversa"],
+        ubicacion: "Sucursal Los Pueblos"
     },
     {
         id: 9,
@@ -113,7 +203,18 @@ const productos = [
         marca: "Hyundai",
         modelo: "Tucson",
         año: 2023,
-        destacado: false
+        destacado: false,
+        carroceria: "SUV",
+        tipo: "Camioneta",
+        combustible: "Gasolina",
+        transmision: "Automática",
+        colorExterior: "Rojo",
+        colorInterior: "Negro",
+        interior: "Tela",
+        puertas: 5,
+        pasajeros: 5,
+        caracteristicas: ["Bluetooth", "Sensores de retroceso", "Pantalla táctil"],
+        ubicacion: "Sucursal Vía Cincuentenario"
     },
     {
         id: 10,
@@ -126,9 +227,20 @@ const productos = [
         marca: "Toyota",
         modelo: "Hilux",
         año: 2025,
-        destacado: true
+        destacado: true,
+        carroceria: "Pickup",
+        tipo: "Camioneta",
+        combustible: "Diesel",
+        transmision: "Manual",
+        colorExterior: "Blanco",
+        colorInterior: "Gris",
+        interior: "Tela",
+        puertas: 4,
+        pasajeros: 5,
+        caracteristicas: ["Tracción 4x4", "Bluetooth", "Ganchos de remolque"],
+        ubicacion: "Sucursal Tocumen"
     },
-        {
+    {
         id: 11,
         placa: 'AC7215',
         nombre: "Toyota Land Cruiser Pickup",
@@ -139,7 +251,18 @@ const productos = [
         marca: "Toyota",
         modelo: "Land Cruiser Pickup",
         año: 2020,
-        destacado: false
+        destacado: false,
+        carroceria: "Pickup",
+        tipo: "Camioneta",
+        combustible: "Diesel",
+        transmision: "Manual",
+        colorExterior: "Beige",
+        colorInterior: "Negro",
+        interior: "Tela",
+        puertas: 2,
+        pasajeros: 2,
+        caracteristicas: ["Tracción 4x4", "Suspensión reforzada", "Control de tracción"],
+        ubicacion: "Sucursal David"
     },
     {
         id: 12,
@@ -152,7 +275,18 @@ const productos = [
         marca: "BYD",
         modelo: "Dolphin",
         año: 2025,
-        destacado: false
+        destacado: false,
+        carroceria: "Hatchback",
+        tipo: "Carro",
+        combustible: "Eléctrico",
+        transmision: "Automática",
+        colorExterior: "Azul",
+        colorInterior: "Gris",
+        interior: "Tela",
+        puertas: 5,
+        pasajeros: 5,
+        caracteristicas: ["Pantalla táctil", "Conectividad Android Auto/Apple CarPlay", "Autonomía extendida"],
+        ubicacion: "Sucursal Vía España"
     },
     {
         id: 13,
@@ -165,6 +299,17 @@ const productos = [
         marca: "Chery",
         modelo: "eQ7",
         año: 2025,
-        destacado: false
+        destacado: false,
+        carroceria: "SUV",
+        tipo: "Camioneta",
+        combustible: "Eléctrico",
+        transmision: "Automática",
+        colorExterior: "Plata",
+        colorInterior: "Negro",
+        interior: "Tela",
+        puertas: 5,
+        pasajeros: 5,
+        caracteristicas: ["Pantalla táctil", "Autonomía extendida", "Asistencia de manejo"],
+        ubicacion: "Sucursal San Miguelito"
     }
 ];

@@ -56,6 +56,8 @@ ul {
     transition: var(--transition);
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-bottom: 2rem;
+
 }
 
 .btn:hover {
@@ -823,3 +825,87 @@ ul {
     }
 }
 
+/* Pagina de detalles */
+/* diseño para los detalles */
+.detalle-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.detalle-producto-box {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 10px;
+    gap: 30px;
+}
+
+.detalle-producto-box img {
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    width: 400px;
+    height: auto;
+}
+
+.detalle-producto-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.detalle-producto-info h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.detalle-producto-info h2 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #e74c3c;
+}
+
+.detalle-producto-info p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 16px;
+}
+
+.destacado {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.botones-extra {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-cotizar {
+    background: #e74c3c;
+}
+/*Movimiento al boton */
+.btn-cotizar:hover {
+    background: #e74c3c;
+}
+
+.btn-whatsapp {
+    background: #25d366;
+    
+}
+/*Movimiento al boton */
+.btn-whatsapp:hover {
+    background: #128c7e;
+}
