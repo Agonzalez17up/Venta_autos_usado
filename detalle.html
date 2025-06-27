@@ -19,7 +19,7 @@
                 <ul class="nav-list">
                     <li><a href="index.html#inicio">Inicio</a></li>
                     <li><a href="index.html#productos">Modelos</a></li>
-                    <li><a href="index.html#testimonios ">Testimonios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
                     <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
                 <div class="cart-icon">
@@ -67,8 +67,9 @@
                     <p><strong>Descripción:</strong> ${producto.descripcion}</p>
                     ${producto.destacado ? '<span class="destacado">Destacado</span>' : ''}
                     <div class="botones-extra">
-                        <a href="#" class="btn btn-cotizar">
+                        <a href="cotizar.html?id=${producto.id}" class="btn btn-cotizar">
                             <i class="fa-solid fa-file-invoice-dollar"></i> Cotizar
+                        </a>
                         <a href="https://wa.me/50712345678" target="_blank" class="btn btn-whatsapp">
                             <i class="fa-brands fa-whatsapp"></i> Whatsapp Chat
                         </a>
@@ -99,9 +100,9 @@
                     <h3>Enlaces Rápidos</h3>
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#productos">Modelos</a></li>
-                        <li><a href="#testimonios">Testimonios</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="index.html#productos">Modelos</a></li>
+                        <li><a href="index.html#testimonios">Testimonios</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

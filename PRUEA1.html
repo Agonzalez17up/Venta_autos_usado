@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotización de Auto</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .info, .precio {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #2d89ef;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background-color: #1b5fbd;
+    }
+
+    /* Estilos del modal */
+    #modal-datos {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modal-datos .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    #modal-datos input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Modal emergente -->
+<div id="modal-datos">
+  <div class="modal-content">
+    <h2>Datos del Cliente</h2>
+    <label>Nombre:</label>
+    <input type="text" id="input-nombre">
+    <label>Teléfono:</label>
+    <input type="tel" id="input-telefono">
+    <label>Email:</label>
+    <input type="email" id="input-email-modal">
+    <button onclick="guardarDatosCliente()" class="btn">Guardar</button>
+  </div>
+</div>
+
+<!-- Cotización -->
+<div id="cotizacion">
+  <h1>Cotización de Vehículo</h1>
+  <div class="info">
+    <p><strong>Número Cotización:</strong> <span id="num-cotizacion"></span></p>
+    <p><strong>Fecha:</strong> <span id="fecha-cotizacion"></span></p>
+    <p><strong>Cliente:</strong> <span id="cliente-cotizacion"></span></p>
+    <p><strong>Teléfono:</strong> <span id="telefono-cotizacion"></span></p>
+    <p><strong>Email:</strong> <span id="email-cotizacion"></span></p>
+  </div>
+
+  <h2>Detalles del Vehículo</h2>
+  <table>
+    <tr><th>Marca</th><td id="marca-cotizacion"></td></tr>
+    <tr><th>Modelo</th><td id="modelo-cotizacion"></td></tr>
+    <tr><th>Año</th><td id="anio-cotizacion"></td></tr>
+    <tr><th>Color</th><td id="color-cotizacion"></td></tr>
+  </table>
+
+  <div class="precio">
+    <strong>Precio total:</strong> <span id="precio-cotizacion"></span>
+  </div>
+
+  <p>Gracias por su preferencia. Esta cotización es válida por 15 días.</p>
+</div>
+
+<!-- Botón PDF -->
+<div style="text-align:center; margin-top: 20px;">
+  <button class="btn" onclick="generarPDF()">Descargar PDF</button>
+</div>
+
+<script>
+  const productos = [
+    {
+      id: 1,
+      nombre: 'Toyota Corolla',
+      marca: 'Toyota',
+      modelo: 'Corolla',
+      año: 2022,
+      color: 'Rojo',
+      precio: 18500
+    },
+    {
+      id: 2,
+      nombre: 'Hyundai Tucson',
+      marca: 'Hyundai',
+      modelo: 'Tucson',
+      año: 2021,
+      color: 'Gris',
+      precio: 23500
+    }
+  ];
+
+  function generarNumeroCotizacion() {
+    let contador = localStorage.getItem('contadorCotizacion');
+    if (!contador) {
+      contador = 1;
+    } else {
+      contador = parseInt(contador) + 1;
+    }
+    const contadorFormateado = contador.toString().padStart(3, '0');
+    localStorage.setItem('contadorCotizacion', contadorFormateado);
+
+    const fecha = new Date();
+    const fechaStr = `${fecha.getFullYear()}${String(fecha.getMonth() + 1).padStart(2, '0')}${String(fecha.getDate()).padStart(2, '0')}`;
+    return `CT-${contadorFormateado}-${fechaStr}`;
+  }
+
+  function generarPDF() {
+    const cotizacion = document.getElementById("cotizacion");
+    html2pdf().set({
+      margin: 10,
+      filename: 'cotizacion-auto.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(cotizacion).save();
+  }
+
+  function mostrarModalDatosCliente() {
+    document.getElementById('modal-datos').style.display = 'flex';
+  }
+
+  function guardarDatosCliente() {
+    const nombre = document.getElementById('input-nombre').value.trim();
+    const telefono = document.getElementById('input-telefono').value.trim();
+    const email = document.getElementById('input-email-modal').value.trim();
+
+    if (!nombre || !telefono || !email) {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
+
+    document.getElementById('cliente-cotizacion').textContent = nombre;
+    document.getElementById('telefono-cotizacion').textContent = telefono;
+    document.getElementById('email-cotizacion').textContent = email;
+
+    document.getElementById('modal-datos').style.display = 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('num-cotizacion').textContent = generarNumeroCotizacion();
+    document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
+
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+    const producto = productos.find(p => p.id === id);
+
+    if (producto) {
+      document.getElementById('marca-cotizacion').textContent = producto.marca;
+      document.getElementById('modelo-cotizacion').textContent = producto.modelo;
+      document.getElementById('anio-cotizacion').textContent = producto.año;
+      document.getElementById('color-cotizacion').textContent = producto.color;
+      document.getElementById('precio-cotizacion').textContent = `$${producto.precio.toLocaleString()}`;
+    } else {
+      alert('Auto no encontrado.');
+    }
+
+    mostrarModalDatosCliente();
+  });
+</script>
+
+</body>
+</html>

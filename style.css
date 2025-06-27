@@ -909,3 +909,53 @@ ul {
 .btn-whatsapp:hover {
     background: #128c7e;
 }
+
+
+
+/* Clases para generacion de PDF  */
+/* #cotizacion {
+      width: 600px;
+      margin: auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      border: 1px solid #ccc;
+} */
+
+#cotizacion {
+      width: 755px;           /* Ancho A4 a 96dpi */
+      min-height: 1000;     /* Alto A4 a 96dpi */
+      border: 1px solid #bbb;
+      padding: 30px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background: #fff;
+}
+@media print {
+      body, html {
+        width: 755px;
+        height: 1122px;
+      }
+#cotizacion {
+        page-break-after: avoid;
+      }
+}
+
+h1, h2 {
+      text-align: center;
+}
+.info, .precio {
+      margin-bottom: 20px;
+}
+.precio {
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
+}
+table {
+      width: 100%;
+      border-collapse: collapse;
+}
+td, th {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago - Best car</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Best<span>car</span></h1>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="cotizar.html">Cotizar</a></li>
+                    <li><a href="pago.html">Pago</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="cotizar-section" style="min-height:70vh;">
+        <div class="container" style="max-width:400px;margin:60px auto;">
+            <h2>Datos de Pago</h2>
+            <div id="resumen-carrito" style="margin-bottom:30px;"></div>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="card-type">Tipo de Tarjeta</label>
+                    <select id="card-type" required>
+                        <option value="">Selecciona</option>
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">MasterCard</option>
+                        <option value="amex">American Express</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="card-name">Nombre en la Tarjeta</label>
+                    <input type="text" id="card-name" maxlength="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Número de Tarjeta</label>
+                    <input type="text" id="card-number" maxlength="16" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-expiry">Fecha de Expiración</label>
+                    <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-cvc">CVC</label>
+                    <input type="text" id="card-cvc" maxlength="4" required>
+                </div>
+                <button type="submit" class="btn">Pagar</button>
+            </form>
+            <div id="mensaje-pago" style="margin-top:20px;"></div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Best car | Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Mostrar resumen del carrito
+    const resumenDiv = document.getElementById('resumen-carrito');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    if (carrito.length > 0) {
+        let subtotal = carrito.reduce((acc, item) => {
+            const precio = Number(item.precio) || 0;
+            const cantidad = Number(item.cantidad) || 1;
+            return acc + (precio * cantidad);
+        }, 0);
+        let extra = subtotal * 0.07;
+        let total = subtotal + extra;
+        resumenDiv.innerHTML = `
+            <h3>Resumen de tu compra</h3>
+            <ul>
+                ${carrito.map(item => `<li>${item.nombre} x${item.cantidad} - $${Number(item.precio).toLocaleString()}</li>`).join('')}
+            </ul>
+            <strong>Subtotal: $${subtotal.toLocaleString()}</strong><br>
+            <strong>Total: $${total.toLocaleString()}</strong>
+        `;
+    } else {
+        resumenDiv.innerHTML = '<p>No hay productos en el carrito.</p>';
+    }
+
+    // Función para generar número de factura
+    function generarFactura() {
+        const fecha = new Date();
+        const yyyy = fecha.getFullYear();
+        const mm = String(fecha.getMonth() + 1).padStart(2, '0');
+        const dd = String(fecha.getDate()).padStart(2, '0');
+        const random = String(Math.floor(Math.random() * 900) + 100); // 3 dígitos
+        return `F-${yyyy}${mm}${dd}-${random}`;
+    }
+
+    // Manejo del pago
+    document.getElementById('payment-form').onsubmit = function(e) {
+        e.preventDefault();
+        const factura = generarFactura();
+        document.getElementById('mensaje-pago').innerHTML = `<span style="color:green;">¡Pago realizado con éxito!</span><br><strong>Número de factura: ${factura}</strong>`;
+        document.getElementById('payment-form').reset();
+        localStorage.removeItem('carrito'); // Limpia el carrito después del pago
+    };
+    </script>
+</body>
+</html>

@@ -232,38 +232,17 @@ clearCart.addEventListener('click', () => {
     showAlert('Carrito vaciado');
 });
 
-// Finalizar compra - SOLO muestra el modal de pago
-document.querySelector('.checkout').addEventListener('click', (e) => {
-    e.preventDefault();
+// Finalizar compra
+document.querySelector('.checkout').addEventListener('click', () => {
     if (cart.length === 0) {
         showAlert('El carrito está vacío');
     } else {
-        localStorage.setItem('carrito', JSON.stringify(cart)); // Guarda el carrito
-        window.location.href = 'pago.html';
+        cart = [];
+        updateCart();
+        cartOverlay.classList.remove('show');
+        showAlert('¡Compra realizada con éxito! Gracias por tu compra');
     }
 });
-
-// Manejar el envío del formulario de pago
-document.getElementById('payment-form').onsubmit = function(e) {
-    e.preventDefault();
-    // Capturar los datos del formulario
-    const tipo = document.getElementById('card-type').value;
-    const numero = document.getElementById('card-number').value;
-    const expiracion = document.getElementById('card-expiry').value;
-    const cvc = document.getElementById('card-cvc').value;
-
-    // Aquí puedes enviar estos datos a un servidor o procesarlos
-
-    // Vaciar el carrito y mostrar mensaje de éxito
-    cart = [];
-    updateCart();
-    cartOverlay.classList.remove('show');
-    showAlert('¡Compra realizada con éxito! Gracias por tu compra');
-
-    // Limpiar formulario y cerrar modal
-    document.getElementById('payment-form').reset();
-    document.getElementById('payment-modal').style.display = 'none';
-};
 
 // Inicializar la aplicación
 function init() {
