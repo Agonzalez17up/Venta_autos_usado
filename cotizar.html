@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotización de Auto</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">  
+</head>
+<body>
+
+<body>
+<script src="db.js"></script>
+<script>
+// Obtener el id de la URL
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'));
+
+// Buscar el producto
+const producto = (typeof productos !== "undefined")
+    ? productos.find(p => p.id === id)
+    : null;
+
+// Mostrar detalles del auto en la cotización
+document.addEventListener('DOMContentLoaded', function() {
+    if (producto) {
+        document.getElementById('marca-cotizacion').textContent = producto.marca || '-';
+        document.getElementById('modelo-cotizacion').textContent = producto.modelo || '-';
+        document.getElementById('carroceria-cotizacion').textContent = producto.tipo || '-';
+        document.getElementById('anio-cotizacion').textContent = producto.año || '-';
+        document.getElementById('precio-cotizacion').textContent = '$' + (producto.precio ? producto.precio.toLocaleString() : '-');
+    } else {
+        document.getElementById('marca-cotizacion').textContent = '-';
+        document.getElementById('modelo-cotizacion').textContent = '-';
+        document.getElementById('carroceria-cotizacion').textContent = '-';
+        document.getElementById('anio-cotizacion').textContent = '-';
+        document.getElementById('precio-cotizacion').textContent = '-';
+    }
+});
+</script>
+
+<script>
+function generarNumeroCotizacion() {
+  let contador = localStorage.getItem('contadorCotizacion');
+  let contadorFormateado;
+
+  if (!contador) {
+    contador = 1;
+  } else {
+    contador = parseInt(contador) + 1;
+  }
+  
+  contadorFormateado = contador.toString().padStart(3, '0');
+  localStorage.setItem('contadorCotizacion', contadorFormateado);
+
+  const fecha = new Date();
+  const yyyy = fecha.getFullYear();
+  const mm = String(fecha.getMonth() + 1).padStart(2, '0');
+  const dd = String(fecha.getDate()).padStart(2, '0');
+  const fechaStr = `${yyyy}${mm}${dd}`;
+
+  return `CT-${contadorFormateado}-${fechaStr}`;
+}
+
+// Mostrar el número de cotización y la fecha al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+  const numcot = generarNumeroCotizacion();
+  document.getElementById('num-cotizacion').textContent = numcot;
+  document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
+});
+</script>
+
+<div id="cotizacion">
+  <h1>Cotización de Vehículo</h1>
+  <div class="info">
+    <p><strong>Numero Cotizacion:</strong> <span id="num-cotizacion"></span></p>
+    <p><strong>Fecha:</strong> <span id="fecha-cotizacion"></span></p>
+    <p><strong>Cliente:</strong> <span id="cliente-cotizacion"></span></p>
+    <p><strong>Teléfono:</strong> <span id="telefono-cotizacion"></span></p>
+    <!-- <p><strong>Email:</strong> <span id="email-cotizacion"></span></p> -->
+  </div>
+<!-- Aqui se crea la tabla con los valores del auto  -->
+  <h2>Detalles del Vehículo</h2>
+  <table>
+    <tr><th>Marca</th><td id="marca-cotizacion"></td></tr>
+    <tr><th>Modelo</th><td id="modelo-cotizacion"></td></tr>
+    <tr><th>Carroceria</th><td id="carroceria-cotizacion"></td></tr>
+    <tr><th>Año</th><td id="anio-cotizacion"></td></tr>
+  </table>
+
+  <div class="precio">
+    Precio total: <span id="precio-cotizacion"></span>
+  </div>
+
+  <p>Gracias por su preferencia. Esta cotización es válida por 15 días.</p>
+</div>
+
+<div style="text-align:center; margin-top: 20px;">
+  <button class="btn btn-cotizar" onclick="generarPDF()">Descargar PDF</button>
+</div>
+
+<script>
+function generarPDF() {
+  const cotizacion = document.getElementById("cotizacion");
+  html2pdf().set({
+    margin: 0, // o 5 si prefieres un pequeño margen
+    filename: 'cotizacion-auto.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  }).from(cotizacion).save();
+}
+</script>
+
+
+</body>
+</html>
