@@ -7,66 +7,93 @@
   <link rel="stylesheet" href="style.css">  
 </head>
 <body>
+    <!-- Header y Navegación -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Best<span>car</span></h1>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#productos">Modelos</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+    </header>
+    <div style="margin-top:100px;">
+        <a id="btn-volver" class="btn">← Volver</a>
+    </div>
 
-<body>
 <script src="db.js"></script>
 <script>
-// Obtener el id de la URL
-const params = new URLSearchParams(window.location.search);
-const id = parseInt(params.get('id'));
+    // Obtener el id de la URL
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+    // Asignar el enlace al botón volver
+    document.getElementById('btn-volver').href = `detalle.html?id=${id}`;
 
-// Buscar el producto
-const producto = (typeof productos !== "undefined")
-    ? productos.find(p => p.id === id)
-    : null;
+    // Buscar el producto
+    const producto = (typeof productos !== "undefined")
+        ? productos.find(p => p.id === id)
+        : null;
 
-// Mostrar detalles del auto en la cotización
-document.addEventListener('DOMContentLoaded', function() {
-    if (producto) {
-        document.getElementById('marca-cotizacion').textContent = producto.marca || '-';
-        document.getElementById('modelo-cotizacion').textContent = producto.modelo || '-';
-        document.getElementById('carroceria-cotizacion').textContent = producto.tipo || '-';
-        document.getElementById('anio-cotizacion').textContent = producto.año || '-';
-        document.getElementById('precio-cotizacion').textContent = '$' + (producto.precio ? producto.precio.toLocaleString() : '-');
-    } else {
-        document.getElementById('marca-cotizacion').textContent = '-';
-        document.getElementById('modelo-cotizacion').textContent = '-';
-        document.getElementById('carroceria-cotizacion').textContent = '-';
-        document.getElementById('anio-cotizacion').textContent = '-';
-        document.getElementById('precio-cotizacion').textContent = '-';
+    // Mostrar detalles del auto en la cotización
+    document.addEventListener('DOMContentLoaded', function() {
+        if (producto) {
+            document.getElementById('marca-cotizacion').textContent = producto.marca || '-';
+            document.getElementById('modelo-cotizacion').textContent = producto.modelo || '-';
+            document.getElementById('carroceria-cotizacion').textContent = producto.tipo || '-';
+            document.getElementById('anio-cotizacion').textContent = producto.año || '-';
+            document.getElementById('precio-cotizacion').textContent = '$' + (producto.precio ? producto.precio.toLocaleString() : '-');
+        } else {
+            document.getElementById('marca-cotizacion').textContent = '-';
+            document.getElementById('modelo-cotizacion').textContent = '-';
+            document.getElementById('carroceria-cotizacion').textContent = '-';
+            document.getElementById('anio-cotizacion').textContent = '-';
+            document.getElementById('precio-cotizacion').textContent = '-';
+        }
+
+        // Mostrar el número de cotización y la fecha al cargar la página
+        const numcot = generarNumeroCotizacion();
+        document.getElementById('num-cotizacion').textContent = numcot;
+        document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
+    });
+
+    function generarNumeroCotizacion() {
+        let contador = localStorage.getItem('contadorCotizacion');
+        let contadorFormateado;
+
+        if (!contador) {
+            contador = 1;
+        } else {
+            contador = parseInt(contador) + 1;
+        }
+
+        contadorFormateado = contador.toString().padStart(3, '0');
+        localStorage.setItem('contadorCotizacion', contadorFormateado);
+
+        const fecha = new Date();
+        const yyyy = fecha.getFullYear();
+        const mm = String(fecha.getMonth() + 1).padStart(2, '0');
+        const dd = String(fecha.getDate()).padStart(2, '0');
+        const fechaStr = `${yyyy}${mm}${dd}`;
+
+        return `CT-${contadorFormateado}-${fechaStr}`;
     }
-});
-</script>
 
-<script>
-function generarNumeroCotizacion() {
-  let contador = localStorage.getItem('contadorCotizacion');
-  let contadorFormateado;
-
-  if (!contador) {
-    contador = 1;
-  } else {
-    contador = parseInt(contador) + 1;
-  }
-  
-  contadorFormateado = contador.toString().padStart(3, '0');
-  localStorage.setItem('contadorCotizacion', contadorFormateado);
-
-  const fecha = new Date();
-  const yyyy = fecha.getFullYear();
-  const mm = String(fecha.getMonth() + 1).padStart(2, '0');
-  const dd = String(fecha.getDate()).padStart(2, '0');
-  const fechaStr = `${yyyy}${mm}${dd}`;
-
-  return `CT-${contadorFormateado}-${fechaStr}`;
-}
-
-// Mostrar el número de cotización y la fecha al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-  const numcot = generarNumeroCotizacion();
-  document.getElementById('num-cotizacion').textContent = numcot;
-  document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
-});
+    function generarPDF() {
+        window.scrollTo(0, 0);
+        const cotizacion = document.getElementById("cotizacion");
+        html2pdf().set({
+            margin: [5, 5, 5, 5], // margen superior, derecho, inferior, izquierdo
+            filename: 'cotizacion-auto.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        }).from(cotizacion).save();
+    }
 </script>
 
 <div id="cotizacion">
@@ -97,21 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="text-align:center; margin-top: 20px;">
   <button class="btn btn-cotizar" onclick="generarPDF()">Descargar PDF</button>
 </div>
-
 <script>
-function generarPDF() {
-  const cotizacion = document.getElementById("cotizacion");
-  html2pdf().set({
-    margin: 0, // o 5 si prefieres un pequeño margen
-    filename: 'cotizacion-auto.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  }).from(cotizacion).save();
-}
+    window.scrollTo(0, 0);
 </script>
-
-
 </body>
 </html>
