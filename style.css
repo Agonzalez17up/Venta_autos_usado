@@ -959,3 +959,19 @@ td, th {
       border: 1px solid #ccc;
       padding: 8px;
     }
+
+#cotizacion {
+    max-width: 700px;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 10px;
+}
+#cotizacion table {
+    width: 100%;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+#cotizacion th, #cotizacion td {
+    border: 1px solid #bbb;
+    padding: 8px;
+}
