@@ -1210,30 +1210,20 @@ tr:last-child td {
 }
 
 @media (max-width: 768px) {
-  .pg-container, .cotizacion-container, .container {
+  .cotizacion-container, .container {
     padding: 10px;
     margin: 10px;
     max-width: 98vw;
   }
-  .pg-summary th, .pg-summary td {
+  #cotizacion table, #cotizacion th, #cotizacion td {
     font-size: 0.98em;
     padding: 6px 2px;
+    display: block;
+    width: 100%;
   }
-  .pg-form-row {
-    flex-direction: column;
-    gap: 0;
-  }
-  .pg-cards {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .pg-payment-box {
-    margin-top: 10px;
-  }
-  .order-success-modal {
-    padding: 20px 5px;
-    max-width: 98vw;
+  #cotizacion table {
+    overflow-x: auto;
+    display: block;
   }
   .footer-links {
     flex-direction: column;
@@ -1242,6 +1232,10 @@ tr:last-child td {
   .navbar .nav-list {
     flex-direction: column;
     gap: 10px;
+  }
+  .modal-content-cotizar {
+    min-width: 90vw;
+    padding: 18px 5px;
   }
 }
 
