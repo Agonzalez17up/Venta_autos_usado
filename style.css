@@ -909,18 +909,14 @@ ul {
 .btn-whatsapp:hover {
     background: #128c7e;
 }
-
-
-
-/* Clases para generacion de PDF  */
-/* #cotizacion {
-      width: 600px;
-      margin: auto;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      border: 1px solid #ccc;
-} */
-
+.cotizacion-container {
+    margin: 40px auto;         /* Ajusta el valor según lo que necesites */
+    max-width: 700px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+}
 #cotizacion {
       width: 755px;           /* Ancho A4 a 96dpi */
       min-height: 1000;     /* Alto A4 a 96dpi */
@@ -952,10 +948,301 @@ h1, h2 {
       color: green;
 }
 table {
-      width: 100%;
-      border-collapse: collapse;
+    border-collapse: collapse !important;
+    width: 100%;
 }
-td, th {
-      border: 1px solid #ccc;
-      padding: 8px;
+th, td {
+    border: 1px solid #bbb !important;
+    padding: 8px;
+}
+tr:last-child td {
+    border-bottom: 1px solid #bbb !important;
+}
+
+/* Clase para el menu de pago */
+
+/* Elimina los bordes internos de la tabla de pago y deja solo la línea inferior */
+.pg-summary, 
+.pg-summary th, 
+.pg-summary td {
+  border: none !important;
+  background: transparent;
+}
+
+.pg-summary {
+  border-bottom: 3px solid #222 !important;
+  border-collapse: collapse;
+}
+
+.pg-summary th, .pg-summary td {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.pg-summary th {
+  font-weight: bold;
+  font-size: 1.05em;
+}
+
+.pg-summary th:last-child,
+.pg-summary td:last-child {
+  text-align: right !important;
+}
+
+.pg-container { max-width: 700px; 
+      margin: 90px auto; 
+      background: #fff; 
+      padding: 30px; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 8px #0001; 
     }
+.pg-summary { 
+      
+       border-bottom: 2px solid #222;
+       margin-bottom: 20px; 
+}
+.pg-summary th, .pg-summary td { 
+      padding: 0px 0;      
+}
+.pg-summary th { 
+      text-align: left; 
+}
+.pg-summary td { 
+
+      text-align: left;
+}
+.pg-total { 
+      font-weight: bold; 
+      color:#E74C3C; 
+      font-size: 20px; 
+}
+.pg-h2 {
+      color: #333333;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-top: 50px;
+      margin-bottom: 20px;
+}
+.pg-cards img { 
+      height: 28px; 
+      margin-right: 8px; 
+      vertical-align: middle; 
+}
+.pg-payment-box { 
+       background: #f7f7f7;
+       border-radius: 6px; 
+       padding: 20px;
+       margin: 20px 0; 
+       border: 1px solid #ccc;
+}
+.pg-form-row { 
+      display: flex; 
+      gap: 16px; 
+      margin-bottom: 16px; }
+.pg-form-group { 
+      flex: 1; 
+      display: flex; 
+      flex-direction: column; 
+      margin-bottom: 16px; 
+}
+.pg-label { 
+      font-weight: bold;
+      margin-bottom: 4px; 
+}
+.pg-input-text { 
+      padding: 10px; 
+      border: 1px solid #bbb; 
+      border-radius: 4px;
+      font-size: 16px; 
+}
+.pg-icon-card { 
+      position: absolute; right: 16px; 
+      top: 32px; color: #888; 
+}
+    .pg-checkbox-row { 
+      margin: 18px 0; 
+}
+.pg-btn { 
+      width: 100%; 
+      background: #E74C3C; 
+      color: #fff; font-size: 20px;
+      font-weight: bold; 
+      border: none; border-radius: 4px; 
+      padding: 16px 0; 
+      cursor: pointer; 
+      letter-spacing: 1px; 
+}
+.pg-btn:hover {
+       background: #E74C3C; 
+}
+.pg-privacy { 
+      font-size: 12px; 
+      color: #888; 
+      margin-top: 10px; 
+}
+.pg-terms-link { 
+      color: #b23ea5; 
+      text-decoration: underline; 
+}
+    .pg-required { 
+      color: #d00; 
+}
+.pg-card-input-row { 
+      position: relative;
+}
+.pg-cards input[type="checkbox"] { 
+      margin-right: 32px; 
+}
+
+/* Confirmación de pedido estilo modal */
+.order-success-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #0002;
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+.order-success-modal .checkmark {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #27ae60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.order-success-modal .checkmark i {
+  color: #27ae60;
+  font-size: 2.5rem;
+}
+.order-success-modal h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.6rem;
+  color: #222;
+}
+.order-success-modal p {
+  color: #444;
+  margin-bottom: 0;
+}
+
+/* Modal Cotizar */
+.modal-cotizar {
+  display: flex;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  align-items: center;
+  justify-content: center;
+}
+.modal-content-cotizar {
+  background: #fff;
+  padding: 32px 28px 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #0002;
+  min-width: 320px;
+  max-width: 95vw;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.cotizar-h2 {
+  color: #222;
+  margin-bottom: 18px;
+}
+.cotizar-form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+.cotizar-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+.cotizar-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+.cotizar-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 11px 32px;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cotizar-btn:hover {
+  background: #c0392b;
+}
+
+/* Fuerza todos los bordes de la tabla de cotización */
+#cotizacion table, 
+#cotizacion th, 
+#cotizacion td {
+    border: 1px solid #bbb !important;
+    border-collapse: collapse;
+}
+#cotizacion table {
+    border-collapse: collapse !important;
+    width: 100%;
+}
+
+#cotizacion th, #cotizacion td {
+    border: 1px solid #bbb !important;
+    padding: 8px;
+}
+
+#cotizacion tr:last-child td {
+    border-bottom: 1px solid #bbb !important;
+}
+
+@media (max-width: 768px) {
+  .pg-container, .cotizacion-container, .container {
+    padding: 10px;
+    margin: 10px;
+    max-width: 98vw;
+  }
+  .pg-summary th, .pg-summary td {
+    font-size: 0.98em;
+    padding: 6px 2px;
+  }
+  .pg-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .pg-cards {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .pg-payment-box {
+    margin-top: 10px;
+  }
+  .order-success-modal {
+    padding: 20px 5px;
+    max-width: 98vw;
+  }
+  .footer-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .navbar .nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
