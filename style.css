@@ -1209,4 +1209,40 @@ tr:last-child td {
     border-bottom: 1px solid #bbb !important;
 }
 
+@media (max-width: 768px) {
+  .pg-container, .cotizacion-container, .container {
+    padding: 10px;
+    margin: 10px;
+    max-width: 98vw;
+  }
+  .pg-summary th, .pg-summary td {
+    font-size: 0.98em;
+    padding: 6px 2px;
+  }
+  .pg-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .pg-cards {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .pg-payment-box {
+    margin-top: 10px;
+  }
+  .order-success-modal {
+    padding: 20px 5px;
+    max-width: 98vw;
+  }
+  .footer-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .navbar .nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 
