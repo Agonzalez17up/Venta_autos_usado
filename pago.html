@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago - Best car</title>
+    <link rel="shortcut icon" href="assets\img\icon_web.jpeg" type="image/x-icon">
+    <title>Best car - Venta de Autos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header y Navegación -->
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -14,97 +17,131 @@
             </div>
             <nav class="navbar">
                 <ul class="nav-list">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="cotizar.html">Cotizar</a></li>
-                    <li><a href="pago.html">Pago</a></li>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#productos">Modelos</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </nav>
         </div>
     </header>
-    <section class="cotizar-section" style="min-height:70vh;">
-        <div class="container" style="max-width:400px;margin:60px auto;">
-            <h2>Datos de Pago</h2>
-            <div id="resumen-carrito" style="margin-bottom:30px;"></div>
-            <form id="payment-form">
-                <div class="form-group">
-                    <label for="card-type">Tipo de Tarjeta</label>
-                    <select id="card-type" required>
-                        <option value="">Selecciona</option>
-                        <option value="visa">Visa</option>
-                        <option value="mastercard">MasterCard</option>
-                        <option value="amex">American Express</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="card-name">Nombre en la Tarjeta</label>
-                    <input type="text" id="card-name" maxlength="50" required>
-                </div>
-                <div class="form-group">
-                    <label for="card-number">Número de Tarjeta</label>
-                    <input type="text" id="card-number" maxlength="16" required>
-                </div>
-                <div class="form-group">
-                    <label for="card-expiry">Fecha de Expiración</label>
-                    <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
-                </div>
-                <div class="form-group">
-                    <label for="card-cvc">CVC</label>
-                    <input type="text" id="card-cvc" maxlength="4" required>
-                </div>
-                <button type="submit" class="btn">Pagar</button>
-            </form>
-            <div id="mensaje-pago" style="margin-top:20px;"></div>
+    <!-- Sección de Contacto -->
+  <div class="pg-container">
+    <table class="pg-summary" width="100%">
+      <tr>
+        <th>Producto</th>
+        <th>Subtotal</th>
+      </tr>
+      <tr>
+        <td>BALANCE by FLO Living Supplements - 2 month ×1</td>
+        <td>$259.00</td>
+      </tr>
+      <tr>
+        <td class="pg-total">Total</td>
+        <td class="pg-total">$259.00</td>
+      </tr>
+    </table>
+
+    <h2 class="pg-h2">Método de Pago</h2>
+    <!-- Solo permite seleccionar una tarjeta -->
+    <div class="pg-cards" style="display: flex; align-items: center;">
+      <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa"/>
+      <input type="radio" id="visa" name="metodo_pago" style="width:18px; height:18px; accent-color: #E74C3C;">
+      
+      <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard"/>
+      <input type="radio" id="mastercard" name="metodo_pago" style="width:18px; height:18px; accent-color: #E74C3C;">
+      
+      <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex"/>
+      <input type="radio" id="amex" name="metodo_pago" style="width:18px; height:18px; accent-color: #E74C3C;">
+      
+      <img src="https://img.icons8.com/?size=100&id=20798&format=png&color=000000" alt="Discover" style="height: 28px;"/>
+      <input type="radio" id="discover" name="metodo_pago" style="width:18px; height:18px; accent-color: #E74C3C;">
+    </div>
+    <div class="pg-payment-box">
+      <p>Paga de forma segura usando tu tarjeta de crédito.</p>
+      <form id="payment-form">
+        <div class="pg-form-group">
+          <label for="card-holder" class="pg-label">Nombre del titular <span class="pg-required">*</span></label>
+          <input type="text" id="card-holder" class="pg-input-text" placeholder="Nombre como aparece en la tarjeta" required>
         </div>
-    </section>
+        <div class="pg-form-group pg-card-input-row">
+          <label for="card-number" class="pg-label">Número de tarjeta <span class="pg-required">*</span></label>
+          <input type="text" id="card-number" class="pg-input-text" placeholder="•••• •••• •••• ••••" maxlength="19" required>
+          <span class="pg-icon-card">💳</span>
+        </div>
+        <div class="pg-form-row">
+          <div class="pg-form-group">
+            <label for="card-expiry" class="pg-label">Expiración (MM/AA) <span class="pg-required">*</span></label>
+            <input type="text" id="card-expiry" class="pg-input-text" placeholder="MM/AA" maxlength="5" required>
+          </div>
+          <div class="pg-form-group">
+            <label for="cvc" class="pg-label">Código de Seguridad <span class="pg-required">*</span></label>
+            <input type="text" id="cvc" class="pg-input-text" placeholder="CVC" maxlength="4" required>
+          </div>
+        </div>
+        <div class="pg-privacy">
+          Tus datos personales se usarán para procesar tu pedido, mejorar tu experiencia en este sitio web y para otros fines descritos en nuestra <a href="#" class="pg-terms-link">política de privacidad</a>.
+        </div>
+        <div class="pg-checkbox-row">
+          <input type="checkbox" id="terms" required>
+          <label for="terms" class="pg-label">He leído y acepto los <a href="#" class="pg-terms-link">términos y condiciones</a> <span class="pg-required">*</span></label>
+        </div>
+        <button class="pg-btn" type="submit">REALIZAR PAGO</button>
+        <div id="mensaje-pago"></div>
+      </form>
+    </div>
+  </div>
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h3>Best car</h3>
+                    <p>Líderes en venta de autos usado con más de 15 años de experiencia en el mercado Panameño.</p>
+                    <div class="social-links">
+                        <!-- Los iconos bienen del estilo CSS https://fontawesome.com/-->
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Modelos</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Financiamiento</a></li>
+                        <li><a href="#">Garantías Extendidas</a></li>
+                        <li><a href="#">Seguros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Suscribete</h3>
+                    <p>Suscríbete para recibir ofertas exclusivas.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Best car | Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
-    <script>
-    // Mostrar resumen del carrito
-    const resumenDiv = document.getElementById('resumen-carrito');
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    if (carrito.length > 0) {
-        let subtotal = carrito.reduce((acc, item) => {
-            const precio = Number(item.precio) || 0;
-            const cantidad = Number(item.cantidad) || 1;
-            return acc + (precio * cantidad);
-        }, 0);
-        let extra = subtotal * 0.07;
-        let total = subtotal + extra;
-        resumenDiv.innerHTML = `
-            <h3>Resumen de tu compra</h3>
-            <ul>
-                ${carrito.map(item => `<li>${item.nombre} x${item.cantidad} - $${Number(item.precio).toLocaleString()}</li>`).join('')}
-            </ul>
-            <strong>Subtotal: $${subtotal.toLocaleString()}</strong><br>
-            <strong>Total: $${total.toLocaleString()}</strong>
-        `;
-    } else {
-        resumenDiv.innerHTML = '<p>No hay productos en el carrito.</p>';
-    }
-
-    // Función para generar número de factura
-    function generarFactura() {
-        const fecha = new Date();
-        const yyyy = fecha.getFullYear();
-        const mm = String(fecha.getMonth() + 1).padStart(2, '0');
-        const dd = String(fecha.getDate()).padStart(2, '0');
-        const random = String(Math.floor(Math.random() * 900) + 100); // 3 dígitos
-        return `F-${yyyy}${mm}${dd}-${random}`;
-    }
-
-    // Manejo del pago
-    document.getElementById('payment-form').onsubmit = function(e) {
-        e.preventDefault();
-        const factura = generarFactura();
-        document.getElementById('mensaje-pago').innerHTML = `<span style="color:green;">¡Pago realizado con éxito!</span><br><strong>Número de factura: ${factura}</strong>`;
-        document.getElementById('payment-form').reset();
-        localStorage.removeItem('carrito'); // Limpia el carrito después del pago
-    };
-    </script>
+    <script src="pago.js"></script>
 </body>
 </html>

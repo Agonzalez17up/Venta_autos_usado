@@ -20,89 +20,81 @@
                     <li><a href="index.html#testimonios">Testimonios</a></li>
                     <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
     </header>
-    <div style="margin-top:100px;">
-        <a id="btn-volver" class="btn">← Volver</a>
-    </div>
-
 <script src="db.js"></script>
 <script>
-    // Obtener el id de la URL
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get('id'));
-    // Asignar el enlace al botón volver
-    document.getElementById('btn-volver').href = `detalle.html?id=${id}`;
+// Obtener el id de la URL
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'));
 
-    // Buscar el producto
-    const producto = (typeof productos !== "undefined")
-        ? productos.find(p => p.id === id)
-        : null;
+// Buscar el producto
+const producto = (typeof productos !== "undefined")
+    ? productos.find(p => p.id === id)
+    : null;
 
-    // Mostrar detalles del auto en la cotización
-    document.addEventListener('DOMContentLoaded', function() {
-        if (producto) {
-            document.getElementById('marca-cotizacion').textContent = producto.marca || '-';
-            document.getElementById('modelo-cotizacion').textContent = producto.modelo || '-';
-            document.getElementById('carroceria-cotizacion').textContent = producto.tipo || '-';
-            document.getElementById('anio-cotizacion').textContent = producto.año || '-';
-            document.getElementById('precio-cotizacion').textContent = '$' + (producto.precio ? producto.precio.toLocaleString() : '-');
-        } else {
-            document.getElementById('marca-cotizacion').textContent = '-';
-            document.getElementById('modelo-cotizacion').textContent = '-';
-            document.getElementById('carroceria-cotizacion').textContent = '-';
-            document.getElementById('anio-cotizacion').textContent = '-';
-            document.getElementById('precio-cotizacion').textContent = '-';
-        }
-
-        // Mostrar el número de cotización y la fecha al cargar la página
-        const numcot = generarNumeroCotizacion();
-        document.getElementById('num-cotizacion').textContent = numcot;
-        document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
-    });
-
-    function generarNumeroCotizacion() {
-        let contador = localStorage.getItem('contadorCotizacion');
-        let contadorFormateado;
-
-        if (!contador) {
-            contador = 1;
-        } else {
-            contador = parseInt(contador) + 1;
-        }
-
-        contadorFormateado = contador.toString().padStart(3, '0');
-        localStorage.setItem('contadorCotizacion', contadorFormateado);
-
-        const fecha = new Date();
-        const yyyy = fecha.getFullYear();
-        const mm = String(fecha.getMonth() + 1).padStart(2, '0');
-        const dd = String(fecha.getDate()).padStart(2, '0');
-        const fechaStr = `${yyyy}${mm}${dd}`;
-
-        return `CT-${contadorFormateado}-${fechaStr}`;
+// Mostrar detalles del auto en la cotización
+document.addEventListener('DOMContentLoaded', function() {
+    if (producto) {
+        document.getElementById('marca-cotizacion').textContent = producto.marca || '-';
+        document.getElementById('modelo-cotizacion').textContent = producto.modelo || '-';
+        document.getElementById('carroceria-cotizacion').textContent = producto.tipo || '-';
+        document.getElementById('anio-cotizacion').textContent = producto.año || '-';
+        document.getElementById('precio-cotizacion').textContent = '$' + (producto.precio ? producto.precio.toLocaleString() : '-');
+    } else {
+        document.getElementById('marca-cotizacion').textContent = '-';
+        document.getElementById('modelo-cotizacion').textContent = '-';
+        document.getElementById('carroceria-cotizacion').textContent = '-';
+        document.getElementById('anio-cotizacion').textContent = '-';
+        document.getElementById('precio-cotizacion').textContent = '-';
     }
-
-    function generarPDF() {
-        window.scrollTo(0, 0);
-        const cotizacion = document.getElementById("cotizacion");
-        html2pdf().set({
-            margin: [5, 5, 5, 5], // margen superior, derecho, inferior, izquierdo
-            filename: 'cotizacion-auto.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-        }).from(cotizacion).save();
-    }
+});
 </script>
 
+<script>
+function generarNumeroCotizacion() {
+  let contador = localStorage.getItem('contadorCotizacion');
+  let contadorFormateado;
+
+  if (!contador) {
+    contador = 1;
+  } else {
+    contador = parseInt(contador) + 1;
+  }
+  
+  contadorFormateado = contador.toString().padStart(3, '0');
+  localStorage.setItem('contadorCotizacion', contadorFormateado);
+
+  const fecha = new Date();
+  const yyyy = fecha.getFullYear();
+  const mm = String(fecha.getMonth() + 1).padStart(2, '0');
+  const dd = String(fecha.getDate()).padStart(2, '0');
+  const fechaStr = `${yyyy}${mm}${dd}`;
+
+  return `CT-${contadorFormateado}-${fechaStr}`;
+}
+
+// Mostrar el número de cotización y la fecha al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+  const numcot = generarNumeroCotizacion();
+  document.getElementById('num-cotizacion').textContent = numcot;
+  document.getElementById('fecha-cotizacion').textContent = new Date().toLocaleDateString();
+});
+</script>
+<section class="products" id="productos"></section>
 <div id="cotizacion">
   <h1>Cotización de Vehículo</h1>
   <div class="info">
     <p><strong>Numero Cotizacion:</strong> <span id="num-cotizacion"></span></p>
     <p><strong>Fecha:</strong> <span id="fecha-cotizacion"></span></p>
-    <p><strong>Cliente:</strong> <span id="cliente-cotizacion"></span></p>
-    <p><strong>Teléfono:</strong> <span id="telefono-cotizacion"></span></p>
+    <p><strong>Cliente:</strong> <span id="campo-cliente"></span><br>
+<strong>Teléfono:</strong> <span id="campo-telefono"></span><br></p>
     <!-- <p><strong>Email:</strong> <span id="email-cotizacion"></span></p> -->
   </div>
 <!-- Aqui se crea la tabla con los valores del auto  -->
@@ -124,8 +116,106 @@
 <div style="text-align:center; margin-top: 20px;">
   <button class="btn btn-cotizar" onclick="generarPDF()">Descargar PDF</button>
 </div>
+</section>
 <script>
-    window.scrollTo(0, 0);
+function generarPDF() {
+  const cotizacion = document.getElementById("cotizacion");
+  html2pdf().set({
+    margin: 0, // o 5 si prefieres un pequeño margen
+    filename: 'cotizacion-auto.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  }).from(cotizacion).save();
+}
 </script>
+
+<!-- Modal para datos del cliente -->
+<div id="modal-datos-cliente" class="modal-cotizar">
+  <div class="modal-content-cotizar">
+    <h2 class="cotizar-h2">Completa tus datos</h2>
+    <form id="form-datos-cliente">
+      <div class="cotizar-form-group">
+        <label for="cliente-nombre" class="cotizar-label">Nombre del Cliente:</label>
+        <input type="text" id="cliente-nombre" class="cotizar-input" required>
+      </div>
+      <div class="cotizar-form-group">
+        <label for="cliente-telefono" class="cotizar-label">Teléfono:</label>
+        <input type="tel" id="cliente-telefono" class="cotizar-input" required>
+      </div>
+      <button type="submit" class="cotizar-btn">Guardar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('modal-datos-cliente');
+  const form = document.getElementById('form-datos-cliente');
+
+  // Mostrar el modal al cargar la página
+  modal.style.display = 'flex';
+
+  form.onsubmit = function(e) {
+    e.preventDefault();
+    // Obtener valores
+    const nombre = document.getElementById('cliente-nombre').value;
+    const telefono = document.getElementById('cliente-telefono').value;
+    // Insertar en los campos de la cotización
+    document.getElementById('campo-cliente').textContent = nombre;
+    document.getElementById('campo-telefono').textContent = telefono;
+    // Ocultar el modal
+    modal.style.display = 'none';
+  };
+});
+</script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h3>Best car</h3>
+                    <p>Líderes en venta de autos usado con más de 15 años de experiencia en el mercado Panameño.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="index.html#productos">Modelos</a></li>
+                        <li><a href="index.html#testimonios">Testimonios</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Financiamiento</a></li>
+                        <li><a href="#">Garantías Extendidas</a></li>
+                        <li><a href="#">Seguros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Suscribete</h3>
+                    <p>Suscríbete para recibir ofertas exclusivas.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Best car | Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

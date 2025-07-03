@@ -46,7 +46,7 @@
             <div class="cart-footer">
                 <h3>Total: $<span class="cart-total">0</span></h3>
                 <button class="clear-cart btn">Vaciar Carrito</button>
-                <button class="checkout btn">Finalizar Compra</button>
+                <button class="checkout btn" id="btn-finalizar-compra">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -231,9 +231,9 @@
                 <div class="footer-col">
                     <h3>Servicios</h3>
                     <ul>
-                        <li><a href="#">Financiamiento</a></li>
-                        <li><a href="#">Garantías Extendidas</a></li>
-                        <li><a href="#">Seguros</a></li>
+                        <li><a href="financiamiento.html">Financiamiento</a></li>
+                        <li><a href="garantias.html">Garantías Extendidas</a></li>
+                        <li><a href="seguros.html">Seguros</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -250,59 +250,17 @@
             </div>
         </div>
     </footer>
-
     <script src="db.js"></script>
     <script src="script.js"></script>
-    <script>
-// Mostrar el modal al hacer clic en "Finalizar Compra"
-document.querySelector('.checkout').onclick = function(e) {
-    e.preventDefault();
-    document.getElementById('payment-modal').style.display = 'block';
-};
-
-// Cerrar el modal
-document.querySelector('.close-modal').onclick = function() {
-    document.getElementById('payment-modal').style.display = 'none';
-};
-
-// Opcional: cerrar al hacer clic fuera del modal
-window.onclick = function(event) {
-    var modal = document.getElementById('payment-modal');
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-};
-
-// Manejar el envío del formulario de pago
-document.getElementById('payment-form').onsubmit = function(e) {
-    e.preventDefault();
-    // Capturar los datos del formulario
-    const tipo = document.getElementById('card-type').value;
-    const numero = document.getElementById('card-number').value;
-    const expiracion = document.getElementById('card-expiry').value;
-    const cvc = document.getElementById('card-cvc').value;
-
-    // Puedes enviar estos datos a un servidor o mostrarlos
-    console.log('Tipo:', tipo);
-    console.log('Número:', numero);
-    console.log('Expiración:', expiracion);
-    console.log('CVC:', cvc);
-
-    alert('¡Pago realizado con éxito!\nTipo: ' + tipo);
-
-    // Limpiar formulario y cerrar modal
-    document.getElementById('payment-form').reset();
-    document.getElementById('payment-modal').style.display = 'none';
-    // Aquí puedes vaciar el carrito si lo deseas
-};
 </script>
-
-    <!-- Start of LiveAgent integration script: Chat button: Botón de circulo animado 89 -->
-    <script type="text/javascript">
-    (function(d, src, c) { var t=d.scripts[d.scripts.length - 1],s=d.createElement('script');s.id='la_x2s6df8d';s.defer=true;s.src=src;s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs&&(rs!='complete')&&(rs!='loaded')){return;}c(this);};t.parentElement.insertBefore(s,t.nextSibling);})(document,
-    'https://bestcar.ladesk.com/scripts/track.js',
-    function(e){ LiveAgent.createButton('05v4waw2', e); });
-    </script>
-    <!-- End of LiveAgent integration script -->
+<!-- Start of LiveAgent integration script: Chat button: Botón de circulo animado 89 -->
+<script type="text/javascript">
+(function(d, src, c) { var t=d.scripts[d.scripts.length - 1],s=d.createElement('script');s.id='la_x2s6df8d';s.defer=true;s.src=src;s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs&&(rs!='complete')&&(rs!='loaded')){return;}c(this);};t.parentElement.insertBefore(s,t.nextSibling);})(document,
+'https://bestcar.ladesk.com/scripts/track.js',
+function(e){ LiveAgent.createButton('05v4waw2', e); });
+</script>
+<!-- End of LiveAgent integration script -->
 </body>
 </html>
+
+

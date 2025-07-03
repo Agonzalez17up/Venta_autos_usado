@@ -57,7 +57,7 @@ function displayProducts(filteredProducts = productos) {
             <article class="product">
                 <div class="product-header">
                     <a href="detalle.html?id=${product.id}">
-                        <img src="${product.imagen}" alt="${product.nombre}">
+                        <img src="${product.imagen}" alt="${product.nombre}" class="product-img-tooltip">
                     </a>
                     ${product.destacado ? '<span class="destacado">Destacado</span>' : ''}
                 </div>
@@ -264,6 +264,12 @@ document.getElementById('payment-form').onsubmit = function(e) {
     document.getElementById('payment-form').reset();
     document.getElementById('payment-modal').style.display = 'none';
 };
+
+// Agrega esto en script.js o en un <script> al final de index.html
+document.getElementById('btn-finalizar-compra').addEventListener('click', function() {
+    // El carrito ya está en localStorage, solo redirige
+    window.location.href = 'pago.html'; // o 'pago_pb.html' según tu archivo de pago
+});
 
 // Inicializar la aplicación
 function init() {
